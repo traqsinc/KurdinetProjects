@@ -19,6 +19,7 @@
             font-family: 'DIN1451G', sans-serif;
             background: url('Resimler/kurdi.png') no-repeat center center fixed; /* Arka plan resmi yolu */
             background-size: cover;
+            background-color: rgba(0, 0, 0, 0.5); /* Arka planın saydamlığı */
             color: #fff;
             margin: 0;
             padding: 0;
@@ -115,7 +116,7 @@
             display: block;
         }
 
-        /* Sol altta "made by traqsinc" */
+        /* Sol altta "made by traqsinc" yazısı */
         .made-by {
             position: fixed; /* Sabit konumda kalacak */
             bottom: 10px;
@@ -216,19 +217,24 @@
 <script>
     function showProducers() {
         // Tüm içerikleri gizle
-        document.body.innerHTML = '';
+        const mainContent = document.querySelector('main');
+        mainContent.style.display = 'none'; // Main içeriği gizle
         // Traqs.gif'i göster
-        const traqsImg = document.createElement('img');
-        traqsImg.src = 'traqs.gif';
-        traqsImg.className = 'traqs';
-        document.body.appendChild(traqsImg);
+        const traqsImg = document.querySelector('.traqs');
+        traqsImg.style.display = 'block';
         // Geri dön butonunu göster
         document.querySelector('.back-button').style.display = 'block';
     }
 
     function goBack() {
-        // Sayfayı yenile, içerikleri geri getir
-        location.reload();
+        // Ana içeriği geri getir
+        const mainContent = document.querySelector('main');
+        mainContent.style.display = 'block';
+        // Traqs.gif'i gizle
+        const traqsImg = document.querySelector('.traqs');
+        traqsImg.style.display = 'none';
+        // Geri dön butonunu gizle
+        document.querySelector('.back-button').style.display = 'none';
     }
 </script>
 
