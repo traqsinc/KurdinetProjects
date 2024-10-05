@@ -5,26 +5,24 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kurdinet Projects</title>
     <style>
-        /* Din 1451 Alt G Fontunu Tanımlıyoruz */
         @font-face {
             font-family: 'DIN1451G';
             src: url('Fontlar/din1451altG.ttf') format('truetype');
         }
 
-        /* Din 1451 Alt Fontunu Tanımlıyoruz */
         @font-face {
             font-family: 'DIN1451';
             src: url('Fontlar/din1451alt.ttf') format('truetype');
         }
 
-        /* Genel body için font DIN1451G */
         body {
             font-family: 'DIN1451G', sans-serif;
-            background-color: #121212;
+            background-color: #000000;
             color: #fff;
             margin: 0;
             padding: 0;
             text-align: center;
+            overflow: hidden;
         }
 
         header {
@@ -33,11 +31,16 @@
             box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
         }
 
-        /* Başlıklar için DIN1451G kullanıyoruz */
+        /* Üstteki yazı için daha büyük font ve yeşil geçişli renk animasyonu */
         h1 {
-            font-size: 2.5rem;
-            color: #1e90ff;
-            font-family: 'DIN1451G', sans-serif;
+            font-size: 4rem; /* Daha büyük yazı boyutu */
+            animation: colorChange 3s infinite alternate;
+            color: #1e90ff; /* Varsayılan renk */
+        }
+
+        @keyframes colorChange {
+            0% { color: #008000; } /* Yeşil */
+            100% { color: #006400; } /* Koyu Yeşil */
         }
 
         .container {
@@ -48,19 +51,18 @@
             padding: 20px;
         }
 
-        /* Proje kutucuklarının yazıları için DIN1451 kullanıyoruz */
-        .section h2 {
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-            font-family: 'DIN1451', sans-serif;
-        }
-
         .section {
             flex: 1 1 30%;
             background-color: #1e1e1e;
             border-radius: 10px;
             padding: 15px;
             margin: 10px;
+        }
+
+        .section h2 {
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+            font-family: 'DIN1451', sans-serif;
         }
 
         iframe {
@@ -105,9 +107,25 @@
             display: block;
         }
 
-        @media(max-width: 768px) {
-            .section {
-                flex: 1 1 100%;
+        /* Mouse hareketi ile beyaz kartopları animasyonu */
+        .snowflake {
+            position: absolute;
+            background-color: #fff;
+            border-radius: 50%;
+            pointer-events: none;
+            width: 5px;
+            height: 5px;
+            animation: fall 5s linear infinite;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
             }
         }
     </style>
@@ -153,6 +171,22 @@
         </a>
     </div>
 </footer>
+
+<script>
+    document.addEventListener('mousemove', function (e) {
+        // Her mouse hareketinde kartopu oluşturuyoruz
+        const snowflake = document.createElement('div');
+        snowflake.classList.add('snowflake');
+        snowflake.style.left = `${e.pageX}px`; // Mouse'un X konumu
+        snowflake.style.top = `${e.pageY}px`;  // Mouse'un Y konumu
+        document.body.appendChild(snowflake);
+
+        // Kartopunu 5 saniye sonra yok ediyoruz
+        setTimeout(() => {
+            snowflake.remove();
+        }, 5000);
+    });
+</script>
 
 </body>
 </html>
