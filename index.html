@@ -22,8 +22,7 @@
             margin: 0;
             padding: 0;
             text-align: center;
-            overflow: hidden;
-            position: relative; /* "made by traqsinc" yazısı için */
+            overflow: auto; /* Sayfa kaydırılabilir olacak */
         }
 
         header {
@@ -32,13 +31,13 @@
             box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
         }
 
-        /* Başlık yazısını büyüttüm ve soldan sağa doğru renk değiştiren bir efekt ekledim */
+        /* Başlık yazısını büyüttüm ve soldan sağa doğru hızlı renk değiştiren bir efekt ekledim */
         h1 {
             font-size: 5rem;
             background: linear-gradient(to right, #008000, #006400);
             background-clip: text;
             color: transparent;
-            animation: colorMove 5s linear infinite;
+            animation: colorMove 2s linear infinite; /* Hız arttırıldı */
             display: inline-block;
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
         }
