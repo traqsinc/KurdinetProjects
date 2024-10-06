@@ -5,179 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kurdinet Projects</title>
     <style>
-        @font-face {
-            font-family: 'DIN1451G';
-            src: url('Fontlar/din1451altG.ttf') format('truetype');
-        }
-
+        /* CSS Stilleri */
         body {
-            font-family: 'DIN1451G', sans-serif;
-            background-color: #000;
-            color: #fff;
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            transition: background-color 0.5s, color 0.5s;
             margin: 0;
             padding: 0;
-            overflow-x: hidden; /* Yatay kaydırmayı engelle */
+            overflow: hidden; /* Sayfayı kaydırılabilir yapmayı engelle */
         }
 
-        header {
+        .dark-mode {
+            background-color: white;
+            color: black;
+        }
+
+        #header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            background-color: rgba(30, 30, 30, 0.8);
             position: relative;
         }
 
-        .header-left {
-            font-size: 40px; /* Yazı boyutunu büyüttük */
-            text-transform: uppercase;
+        #header-left {
+            font-size: 36px;
             font-weight: bold;
-            letter-spacing: 2px;
-            transition: color 0.5s ease;
+            color: green;
+            animation: colorChange 2s infinite alternate;
+        }
+
+        @keyframes colorChange {
+            0% { color: green; }
+            100% { color: darkgreen; }
         }
 
         .header-right {
-            display: flex;
-            gap: 20px;
+            position: absolute;
+            right: 20px;
         }
 
         button {
-            padding: 10px 20px;
-            background-color: #7289da;
-            color: white;
+            margin-left: 10px;
+            padding: 10px;
             border: none;
-            border-radius: 5px;
+            background-color: darkgreen;
+            color: white;
             cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
+            border-radius: 5px;
         }
 
         button:hover {
-            background-color: #5865f2;
+            background-color: green;
         }
 
-        .user-info {
-            display: none; /* Varsayılan olarak gizli */
+        #user-info {
             text-align: center;
             margin-top: 20px;
         }
-
-        .projects {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-top: 50px; /* Üstten boşluk */
-            flex-wrap: wrap; /* Projelerin sarmalamasını sağla */
-        }
-
-        .project {
-            background-color: rgba(50, 50, 50, 0.9);
-            padding: 10px; /* Dış boşluğu küçülttük */
-            border-radius: 8px;
-            width: 250px; /* Proje kutularını küçülttük */
-            text-align: center;
-        }
-
-        .project h3 {
-            font-size: 16px; /* Proje başlıklarını küçülttük */
-            margin-bottom: 10px;
-        }
-
-        .project iframe {
-            width: 100%;
-            height: 120px; /* Video boyutunu küçültüldü */
-            border: none;
-        }
     </style>
+    <script>
+        // Kullanıcının token'ını URL'den alır ve kullanıcı bilgilerini getirir
+        function getUserInfo() {
+            const hash = window.location.hash;
+            if (hash) {
+                const token = hash.split('&')[0].split('=')[1];
+                fetch('https://discord.com/api/users/@me', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('user-info').innerHTML = `
+                        <h2>Hoş Geldiniz, ${data.username}!</h2>
+                        <img src="${data.avatar ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png` : ''}" alt="Avatar" width="100">
+                    `;
+                })
+                .catch(error => console.error('Hata:', error));
+            }
+        }
+
+        // Sayfa yüklendiğinde kullanıcı bilgilerini al
+        window.onload = getUserInfo;
+
+        // Tema geçişi işlevi
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+        }
+    </script>
 </head>
 <body>
-    <header>
-        <div id="header-left" class="header-left">Kurdinet Projects</div>
+    <header id="header">
+        <div id="header-left">Kurdinet Projects</div>
         <div class="header-right">
             <button class="theme-toggle" onclick="toggleTheme()">Siyah/Beyaz Mod</button>
-            <button onclick="window.location.href='https://discord.com/oauth2/authorize?client_id=1292393068506517615&scope=identify&response_type=token&redirect_uri=https://your_redirect_uri.com'">Giriş Yap</button>
+            <button onclick="window.location.href='https://discord.com/oauth2/authorize?client_id=1292393068506517615&response_type=code&redirect_uri=https%3A%2F%2Ftraqsinc.github.io%2FKurdinetProjects%2F&scope=identify'">Discord ile Giriş Yap</button>
         </div>
     </header>
-
-    <div class="user-info" id="user-info">
-        <img id="user-avatar" src="" alt="Avatar" style="border-radius: 50%; width: 100px; height: 100px;">
-        <h3 id="user-name"></h3>
-    </div>
-
-    <div class="projects">
-        <div class="project">
-            <h3>Proje 1</h3>
-            <iframe src="https://www.youtube.com/embed/your_video_id" allowfullscreen></iframe>
-            <button onclick="window.location.href='https://example.com'">Detaylar</button>
-        </div>
-        <div class="project">
-            <h3>Proje 2</h3>
-            <iframe src="https://www.youtube.com/embed/your_video_id" allowfullscreen></iframe>
-            <button onclick="window.location.href='https://example.com'">Detaylar</button>
-        </div>
-        <div class="project">
-            <h3>Proje 3</h3>
-            <iframe src="https://www.youtube.com/embed/your_video_id" allowfullscreen></iframe>
-            <button onclick="window.location.href='https://example.com'">Detaylar</button>
-        </div>
-        <div class="project">
-            <h3>Proje 4</h3>
-            <iframe src="https://www.youtube.com/embed/your_video_id" allowfullscreen></iframe>
-            <button onclick="window.location.href='https://example.com'">Detaylar</button>
-        </div>
-    </div>
-
-    <script>
-        function changeColor() {
-            const headerLeft = document.getElementById('header-left');
-            let isGreen = true;
-
-            setInterval(() => {
-                if (isGreen) {
-                    headerLeft.style.color = '#00ff00'; // Yeşil
-                } else {
-                    headerLeft.style.color = '#006400'; // Koyu Yeşil
-                }
-                isGreen = !isGreen;
-            }, 500); // Her 0.5 saniyede bir renk değişir
-        }
-        changeColor(); // Sayfa açıldığında renk değiştirme başlar
-
-        function toggleTheme() {
-            const body = document.body;
-
-            if (body.classList.contains('light-mode')) {
-                body.classList.remove('light-mode');
-                body.style.backgroundColor = '#000';
-                body.style.color = '#fff';
-            } else {
-                body.classList.add('light-mode');
-                body.style.backgroundColor = '#fff';
-                body.style.color = '#000';
-            }
-        }
-
-        async function fetchUserInfo() {
-            const accessToken = new URLSearchParams(window.location.hash).get('access_token');
-            if (accessToken) {
-                const response = await fetch('https://discord.com/api/users/@me', {
-                    method: 'GET',
-                    headers: {
-                        Authorization: `Bearer ${accessToken}`,
-                    },
-                });
-
-                if (response.ok) {
-                    const userData = await response.json();
-                    document.getElementById('user-name').innerText = userData.username;
-                    document.getElementById('user-avatar').src = userData.avatar ? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png` : 'default_avatar.png';
-                    document.getElementById('user-info').style.display = 'block'; // Kullanıcı bilgilerini göster
-                }
-            }
-        }
-
-        // Sayfa yüklendiğinde kullanıcı bilgilerini çek
-        window.onload = fetchUserInfo;
-    </script>
+    
+    <div id="user-info"></div>
 </body>
 </html>
