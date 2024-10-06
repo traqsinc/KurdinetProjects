@@ -16,6 +16,7 @@
             color: #fff;
             margin: 0;
             padding: 0;
+            overflow-x: hidden; /* Yatay kaydırmayı engelle */
         }
 
         header {
@@ -24,14 +25,15 @@
             align-items: center;
             padding: 20px;
             background-color: rgba(30, 30, 30, 0.8);
+            position: relative;
         }
 
         .header-left {
-            font-size: 32px; /* Yazıyı biraz daha büyütelim */
+            font-size: 32px;
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 2px;
-            transition: color 0.5s ease; /* Renk değişim geçişi */
+            transition: color 0.5s ease;
         }
 
         .header-right {
@@ -55,41 +57,40 @@
 
         .theme-toggle {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            padding: 15px 30px;
-            background-color: #fff;
-            color: #000;
+            top: 20px; /* Butonu yukarı aldık */
+            right: 20px; /* Sağ üst köşeye yerleştirdik */
+            background-image: url('path_to_your_image.png'); /* Buton için resim ekleyin */
+            background-size: cover;
+            width: 50px; /* Resmin boyutu */
+            height: 50px; /* Resmin boyutu */
             border: none;
             cursor: pointer;
-            border-radius: 8px;
-            font-size: 16px;
         }
 
         .projects {
             display: flex;
             justify-content: center;
             gap: 20px;
-            margin-top: 100px;
+            margin-top: 50px; /* Üstten boşluk */
+            flex-wrap: wrap; /* Projelerin sarmalamasını sağla */
         }
 
         .project {
             background-color: rgba(50, 50, 50, 0.9);
-            padding: 20px;
+            padding: 10px; /* Dış boşluğu küçülttük */
             border-radius: 8px;
-            width: 200px;
+            width: 250px; /* Proje kutularını küçülttük */
             text-align: center;
         }
 
         .project h3 {
-            font-size: 18px;
+            font-size: 16px; /* Proje başlıklarını küçülttük */
             margin-bottom: 10px;
         }
 
         .project iframe {
             width: 100%;
-            height: 150px;
+            height: 120px; /* Video boyutunu küçülttük */
             border: none;
         }
     </style>
@@ -98,9 +99,10 @@
     <header>
         <div id="header-left" class="header-left">Kurdinet Projects</div>
         <div class="header-right">
-            <button onclick="window.location.href='/login'">Giriş Yap</button>
-            <button onclick="window.location.href='/register'">Kayıt Ol</button>
+            <button onclick="window.location.href='https://yourwebsite.com/login'">Giriş Yap</button>
+            <button onclick="window.location.href='https://yourwebsite.com/register'">Kayıt Ol</button>
         </div>
+        <button class="theme-toggle" onclick="toggleTheme()" title="Siyah/Beyaz Mod"></button>
     </header>
 
     <div class="projects">
@@ -126,10 +128,7 @@
         </div>
     </div>
 
-    <button class="theme-toggle" onclick="toggleTheme()">Siyah/Beyaz Mod</button>
-
     <script>
-        // Kurdinet Projects yazısının renk değiştirmesi
         function changeColor() {
             const headerLeft = document.getElementById('header-left');
             let isGreen = true;
@@ -145,7 +144,6 @@
         }
         changeColor(); // Sayfa açıldığında renk değiştirme başlar
 
-        // Siyah/Beyaz Mod geçişi
         function toggleTheme() {
             const body = document.body;
             const themeButton = document.querySelector('.theme-toggle');
@@ -167,7 +165,6 @@
             }
         }
 
-        // Sayfa yenilendiğinde doğru modu geri yükle
         window.onload = function() {
             if (document.body.classList.contains('light-mode')) {
                 toggleTheme();
