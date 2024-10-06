@@ -41,3 +41,64 @@ async function getUserInfo() {
 }
 
 // Kullanıcı bilgilerini gösterir
+function displayUserInfo(userData) {
+    const userInfoDiv = document.getElementById('user-info');
+    userInfoDiv.innerHTML = `
+        <h2>Hoşgeldin, ${userData.username}!</h2>
+        <img src="${userData.avatar ? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png` : 'https://via.placeholder.com/128'}" alt="Avatar" />
+    `;
+}
+
+// Admin girişi için kullanıcı adı ve şifre kontrolü
+function adminLogin() {
+    const username = document.getElementById('admin-username').value;
+    const password = document.getElementById('admin-password').value;
+
+    if (username === 'admin' && password === 'بيرجو إنجين بولات') {
+        // Admin girişi başarılı olduğunda ekrandaki her şeyi temizle
+        document.body.innerHTML = '';
+        showAdminPanel();
+    } else {
+        alert('Hatalı kullanıcı adı veya şifre!');
+    }
+}
+
+// Admin panelini göster
+function showAdminPanel() {
+    const adminPanel = document.getElementById('admin-panel');
+    adminPanel.style.display = 'block';
+}
+
+// Duyuru oluşturma işlemi
+function createAnnouncement() {
+    const announcementInput = document.getElementById('announcement-input');
+    const announcementDuration = document.getElementById('announcement-duration');
+    const announcementText = announcementInput.value;
+    const duration = parseInt(announcementDuration.value) * 1000; // saniyeyi milisaniyeye çevir
+
+    if (announcementText && duration > 0) {
+        const announcementDiv = document.getElementById('announcement');
+        announcementDiv.innerText = announcementText;
+        announcementDiv.style.display = 'block';
+
+        setTimeout(() => {
+            announcementDiv.style.display = 'none';
+        }, duration);
+    } else {
+        alert('Duyuru metni ve süre gerekli!');
+    }
+}
+
+// Temanın siyah veya beyaz olarak değişmesini sağlar
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+}
+
+// Admin giriş formunu aç/kapat
+function toggleAdminLogin() {
+    const adminLogin = document.getElementById('admin-login');
+    adminLogin.style.display = adminLogin.style.display === 'none' ? 'block' : 'none';
+}
+
+// Sayfa yüklendiğinde kullanıcı bilgilerini getir
+window.onload = getUserInfo;
