@@ -112,6 +112,18 @@
             border-radius: 10px;
             z-index: 10;
         }
+
+        /* Duyuru Stili */
+        #announcement {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            display: none; /* Başlangıçta gizli */
+        }
     </style>
 </head>
 <body>
@@ -144,6 +156,9 @@
             <iframe src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID_4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
+
+    <!-- Duyuru -->
+    <div id="announcement"></div>
 
     <!-- Admin Giriş Formu -->
     <div id="admin-login">
