@@ -26,7 +26,6 @@ async function getUserInfo() {
             });
 
             const userData = await userResponse.json();
-            // Kullanıcı bilgilerini depolamak için localStorage kullanılıyor
             localStorage.setItem('discordUser', JSON.stringify(userData));
 
             displayUserInfo(userData);
@@ -34,7 +33,6 @@ async function getUserInfo() {
             console.error('Token alınamadı:', tokenData);
         }
     } else {
-        // Eğer daha önce giriş yapılmışsa kullanıcı bilgilerini al
         const userData = JSON.parse(localStorage.getItem('discordUser'));
         if (userData) {
             displayUserInfo(userData);
@@ -45,35 +43,55 @@ async function getUserInfo() {
 // Kullanıcı bilgilerini gösterir
 function displayUserInfo(userData) {
     document.getElementById('user-info').innerHTML = `
-        <h2>Hoş Geldiniz, ${userData.username}!</h2>
-        <img src="${userData.avatar ? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png` : ''}" alt="Avatar" width="100">
+        <img src="${userData.avatar ? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}` : 'default-avatar.png'}" alt="Avatar" style="width: 50px; border-radius: 50%;">
+        <span>Discord ile Hoş Geldiniz, ${userData.username}!</span>
     `;
+    document.getElementById('announcement').innerHTML = ""; // Sayfa yenilendiğinde duyuruyu gizle
 }
 
-// Sayfa yüklendiğinde kullanıcı bilgilerini al
-window.onload = getUserInfo;
-
-// Tema geçişi işlevi
+// Tema değiştirici
 function toggleTheme() {
     document.body.classList.toggle('dark-mode');
 }
 
-// Admin Giriş Formunu aç/kapat
+// Admin girişi
 function toggleAdminLogin() {
-    const adminLogin = document.getElementById('admin-login');
-    adminLogin.style.display = adminLogin.style.display === 'block' ? 'none' : 'block';
+    const loginDiv = document.getElementById('admin-login');
+    loginDiv.style.display = loginDiv.style.display === 'block' ? 'none' : 'block';
 }
 
-// Admin Giriş Kontrolü
+// Admin girişi kontrolü
 function adminLogin() {
     const username = document.getElementById('admin-username').value;
     const password = document.getElementById('admin-password').value;
 
     if (username === 'admin' && password === 'بيرجو إنجين بولات') {
-        alert('Admin Girişi Başarılı!');
-        // Admin sayfasına yönlendirme veya admin işlemleri buraya eklenebilir
-        toggleAdminLogin(); // Formu kapat
+        alert('Admin girişi başarılı!');
+        document.getElementById('admin-panel').style.display = 'block';
+        toggleAdminLogin(); // Giriş formunu kapat
     } else {
-        alert('Kullanıcı adı veya şifre hatalı!');
+        alert('Kullanıcı adı veya şifre yanlış!');
     }
 }
+
+// Admin panelini kapat
+function toggleAdminPanel() {
+    const panelDiv = document.getElementById('admin-panel');
+    panelDiv.style.display = panelDiv.style.display === 'block' ? 'none' : 'block';
+}
+
+// Duyuru oluştur
+function createAnnouncement() {
+    const announcementInput = document.getElementById('announcement-input').value;
+    const duration = parseInt(document.getElementById('announcement-duration').value) || 5; // Varsayılan süre 5 saniye
+    document.getElementById('announcement').innerText = announcementInput;
+    document.getElementById('announcement').style.display = 'block';
+    
+    // Duyuruyu gizlemek için zamanlayıcı
+    setTimeout(() => {
+        document.getElementById('announcement').style.display = 'none';
+    }, duration * 1000);
+}
+
+// Sayfa yüklendiğinde kullanıcı bilgilerini getir
+window.onload = getUserInfo;
