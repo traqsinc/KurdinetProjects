@@ -26,6 +26,7 @@ async function getUserInfo() {
             });
 
             const userData = await userResponse.json();
+            // Kullanıcı bilgilerini depolamak için localStorage kullanılıyor
             localStorage.setItem('discordUser', JSON.stringify(userData));
 
             displayUserInfo(userData);
@@ -33,6 +34,7 @@ async function getUserInfo() {
             console.error('Token alınamadı:', tokenData);
         }
     } else {
+        // Eğer daha önce giriş yapılmışsa kullanıcı bilgilerini al
         const userData = JSON.parse(localStorage.getItem('discordUser'));
         if (userData) {
             displayUserInfo(userData);
@@ -42,17 +44,36 @@ async function getUserInfo() {
 
 // Kullanıcı bilgilerini gösterir
 function displayUserInfo(userData) {
-    const userInfoDiv = document.getElementById('user-info');
-    userInfoDiv.innerHTML = `
-        <h2>Hoşgeldin, ${userData.username}!</h2>
-        <img src="${userData.avatar ? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png` : 'https://via.placeholder.com/128'}" alt="Avatar" />
+    document.getElementById('user-info').innerHTML = `
+        <h2>Hoş Geldiniz, ${userData.username}!</h2>
+        <img src="${userData.avatar ? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png` : ''}" alt="Avatar" width="100">
     `;
 }
 
-// Temanın siyah veya beyaz olarak değişmesini sağlar
+// Sayfa yüklendiğinde kullanıcı bilgilerini al
+window.onload = getUserInfo;
+
+// Tema geçişi işlevi
 function toggleTheme() {
     document.body.classList.toggle('dark-mode');
 }
 
-// Sayfa yüklendiğinde kullanıcı bilgilerini getir
-window.onload = getUserInfo;
+// Admin Giriş Formunu aç/kapat
+function toggleAdminLogin() {
+    const adminLogin = document.getElementById('admin-login');
+    adminLogin.style.display = adminLogin.style.display === 'block' ? 'none' : 'block';
+}
+
+// Admin Giriş Kontrolü
+function adminLogin() {
+    const username = document.getElementById('admin-username').value;
+    const password = document.getElementById('admin-password').value;
+
+    if (username === 'admin' && password === 'بيرجو إنجين بولات') {
+        alert('Admin Girişi Başarılı!');
+        // Admin sayfasına yönlendirme veya admin işlemleri buraya eklenebilir
+        toggleAdminLogin(); // Formu kapat
+    } else {
+        alert('Kullanıcı adı veya şifre hatalı!');
+    }
+}
