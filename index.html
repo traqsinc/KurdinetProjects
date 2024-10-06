@@ -65,30 +65,21 @@
             background-color: green;
         }
 
-        /* Admin Giriş Stili */
-        #admin-login {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 10;
+        /* Proje Stilleri */
+        #projects {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
         }
 
-        /* Admin Paneli Stili */
-        #admin-panel {
-            display: none;
-            position: fixed;
-            top: 10%;
-            left: 50%;
-            transform: translate(-50%, 0);
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
+        .project {
+            margin: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
             border-radius: 10px;
-            z-index: 10;
+            width: 80%;
+            max-width: 600px;
         }
 
         /* Duyuru Stili */
@@ -135,29 +126,6 @@
         </div>
     </div>
 
-    <!-- Admin Giriş Formu -->
-    <div id="admin-login">
-        <h2>Admin Girişi</h2>
-        <label for="admin-username">Kullanıcı Adı:</label>
-        <input type="text" id="admin-username"><br>
-        <label for="admin-password">Şifre:</label>
-        <input type="password" id="admin-password"><br>
-        <button onclick="adminLogin()">Giriş Yap</button>
-        <button onclick="toggleAdminLogin()">Kapat</button>
-    </div>
-
-    <!-- Admin Paneli -->
-    <div id="admin-panel">
-        <h2>Admin Paneli</h2>
-        <label for="announcement-input">Duyuru Yaz:</label>
-        <input type="text" id="announcement-input" placeholder="Duyuru metni"><br>
-        <label for="announcement-duration">Süre (saniye):</label>
-        <input type="number" id="announcement-duration" placeholder="Süre yazın" min="1"><br>
-        <button onclick="createAnnouncement()">Duyuru Oluştur</button>
-        <button onclick="toggleAdminPanel()">Kapat</button>
-    </div>
-    
-    <!-- Duyuru Bölümü -->
     <div id="announcement"></div>
     
     <script src="index.js"></script>
