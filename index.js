@@ -57,3 +57,23 @@ window.onload = getUserInfo;
 function toggleTheme() {
     document.body.classList.toggle('dark-mode');
 }
+
+// Admin Giriş Formunu aç/kapat
+function toggleAdminLogin() {
+    const adminLogin = document.getElementById('admin-login');
+    adminLogin.style.display = adminLogin.style.display === 'block' ? 'none' : 'block';
+}
+
+// Admin Giriş Kontrolü
+function adminLogin() {
+    const username = document.getElementById('admin-username').value;
+    const password = document.getElementById('admin-password').value;
+
+    if (username === 'admin' && password === 'بيرجو إنجين بولات') {
+        alert('Admin Girişi Başarılı!');
+        // Admin sayfasına yönlendirme veya admin işlemleri buraya eklenebilir
+        toggleAdminLogin(); // Formu kapat
+    } else {
+        alert('Kullanıcı adı veya şifre hatalı!');
+    }
+}
