@@ -56,15 +56,6 @@
             background-color: #5865f2;
         }
 
-        .theme-toggle {
-            background-color: #7289da; /* Temanın buton rengi */
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-
         .user-info {
             display: none; /* Varsayılan olarak gizli */
             text-align: center;
@@ -104,8 +95,7 @@
         <div id="header-left" class="header-left">Kurdinet Projects</div>
         <div class="header-right">
             <button class="theme-toggle" onclick="toggleTheme()">Siyah/Beyaz Mod</button>
-            <button onclick="window.location.href='https://discord.com/oauth2/authorize?client_id=1292393068506517615&scope=identify'">Giriş Yap</button>
-            <button onclick="window.location.href='https://yourwebsite.com/register'">Kayıt Ol</button>
+            <button onclick="window.location.href='https://discord.com/oauth2/authorize?client_id=1292393068506517615&scope=identify&response_type=token&redirect_uri=https://your_redirect_uri.com'">Giriş Yap</button>
         </div>
     </header>
 
@@ -167,9 +157,8 @@
             }
         }
 
-        // Discord'tan kullanıcı bilgilerini al
         async function fetchUserInfo() {
-            const accessToken = new URLSearchParams(window.location.search).get('access_token');
+            const accessToken = new URLSearchParams(window.location.hash).get('access_token');
             if (accessToken) {
                 const response = await fetch('https://discord.com/api/users/@me', {
                     method: 'GET',
@@ -187,11 +176,8 @@
             }
         }
 
-        // Sayfa yüklendiğinde kullanıcı bilgilerini al
-        window.onload = function() {
-            fetchUserInfo();
-            changeColor(); // Renk değişim fonksiyonu
-        }
+        // Sayfa yüklendiğinde kullanıcı bilgilerini çek
+        window.onload = fetchUserInfo;
     </script>
 </body>
 </html>
