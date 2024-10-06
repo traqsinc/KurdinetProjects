@@ -64,6 +64,23 @@
             text-align: center;
             margin-top: 20px;
         }
+
+        /* Projeler Stili */
+        #projects {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .project {
+            background-color: darkgray;
+            color: black;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 5px;
+            width: 200px;
+            text-align: center;
+        }
     </style>
     <script>
         // Kullanıcının token'ını URL'den alır ve kullanıcı bilgilerini getirir
@@ -82,6 +99,8 @@
                         <h2>Hoş Geldiniz, ${data.username}!</h2>
                         <img src="${data.avatar ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png` : ''}" alt="Avatar" width="100">
                     `;
+                    // Token'ı URL'den kaldır
+                    window.location.hash = '';
                 })
                 .catch(error => console.error('Hata:', error));
             }
@@ -106,5 +125,24 @@
     </header>
     
     <div id="user-info"></div>
+
+    <div id="projects">
+        <div class="project">
+            <h3>Proje 1</h3>
+            <a href="https://link-to-your-project-1.com">Proje Linki</a>
+        </div>
+        <div class="project">
+            <h3>Proje 2</h3>
+            <a href="https://link-to-your-project-2.com">Proje Linki</a>
+        </div>
+        <div class="project">
+            <h3>Proje 3</h3>
+            <a href="https://link-to-your-project-3.com">Proje Linki</a>
+        </div>
+        <div class="project">
+            <h3>Proje 4</h3>
+            <a href="https://link-to-your-project-4.com">Proje Linki</a>
+        </div>
+    </div>
 </body>
 </html>
