@@ -10,233 +10,139 @@
             src: url('Fontlar/din1451altG.ttf') format('truetype');
         }
 
-        @font-face {
-            font-family: 'DIN1451';
-            src: url('Fontlar/din1451alt.ttf') format('truetype');
-        }
-
         body {
             font-family: 'DIN1451G', sans-serif;
-            background: url('Resimler/kurdi.png') no-repeat center center fixed; /* Arka plan resmi yolu */
-            background-size: cover;
-            background-color: rgba(0, 0, 0, 0.5); /* Arka planın saydamlığı */
+            background-color: #000;
             color: #fff;
             margin: 0;
             padding: 0;
-            text-align: center;
-            overflow: auto; /* Sayfa kaydırılabilir olacak */
         }
 
         header {
-            padding: 40px 0;
-            background-color: rgba(30, 30, 30, 0.8); /* Arka planı şeffaf yaptım */
-            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
-        }
-
-        h1 {
-            font-size: 5rem;
-            background: linear-gradient(to right, #008000, #006400);
-            background-clip: text;
-            color: transparent;
-            animation: colorMove 1s linear infinite; /* Hızlı renk değiştirme */
-            display: inline-block;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        @keyframes colorMove {
-            0% {
-                background-position: 0%;
-            }
-            100% {
-                background-position: 100%;
-            }
-        }
-
-        .container {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            gap: 15px;
+            justify-content: space-between;
+            align-items: center;
             padding: 20px;
-        }
-
-        .section {
-            flex: 1 1 30%;
-            background-color: rgba(30, 30, 30, 0.8); /* Arka planı şeffaf yaptım */
-            border-radius: 10px;
-            padding: 15px;
-            margin: 10px;
-        }
-
-        .section h2 {
-            margin-bottom: 15px;
-            font-size: 1.5rem;
-            font-family: 'DIN1451', sans-serif;
-        }
-
-        iframe {
-            width: 100%;
-            height: 200px;
-            border: none;
-            border-radius: 10px;
-        }
-
-        .button {
-            display: inline-block;
-            padding: 8px 15px;
-            margin-top: 15px;
-            background-color: #1e90ff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-
-        .button:hover {
-            background-color: #005bb5;
-        }
-
-        footer {
-            margin-top: 40px;
-            padding: 20px;
-        }
-
-        .discord-logo {
-            width: 50px;
-            height: 50px;
-            margin: 20px auto;
-        }
-
-        .discord-logo img {
-            width: 100%;
-            height: 100%;
-        }
-
-        .discord-logo a {
-            display: block;
-        }
-
-        /* Sol altta "made by traqsinc" yazısı */
-        .made-by {
-            position: fixed; /* Sabit konumda kalacak */
-            bottom: 10px;
-            left: 10px;
-            font-size: 0.8rem;
-            font-family: 'DIN1451', sans-serif;
-            color: #ffffff;
-        }
-
-        /* Geri dön butonu ve yapımcılar butonu */
-        .back-button, .producers-button {
-            position: fixed;
             background-color: rgba(30, 30, 30, 0.8);
-            border: none;
+        }
+
+        .header-left {
+            font-size: 24px; /* Yazıyı küçültme */
+            text-transform: uppercase;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .header-right {
+            display: flex;
+            gap: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #7289da;
             color: white;
-            padding: 10px 15px;
+            border: none;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
         }
 
-        .back-button {
-            top: 10px;
-            left: 10px;
-            display: none; /* Başlangıçta gizli */
+        button:hover {
+            background-color: #5865f2;
         }
 
-        .producers-button {
-            bottom: 10px;
-            right: 10px;
+        .theme-toggle {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px 30px;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            font-size: 16px;
         }
 
-        /* Traqs.gif için gizli ayarlar */
-        .hidden {
-            display: none;
+        .projects {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 100px;
         }
-        
-        .traqs {
-            display: none; /* Başlangıçta gizli */
+
+        .project {
+            background-color: rgba(50, 50, 50, 0.9);
+            padding: 20px;
+            border-radius: 8px;
+            width: 200px;
+            text-align: center;
+        }
+
+        .project h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .project iframe {
             width: 100%;
-            height: auto;
+            height: 150px;
+            border: none;
         }
     </style>
 </head>
 <body>
-
-<header>
-    <h1>Kurdinet Projects</h1>
-</header>
-
-<main>
-    <button class="producers-button" onclick="showProducers()">Yapımcılar</button>
-    <div class="container">
-        <div class="section">
-            <h2>Proje 1</h2>
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID1" allowfullscreen></iframe>
-            <a href="https://link1.com" class="button">Proje 1 Link</a>
+    <header>
+        <div class="header-left">Kurdinet Projects</div>
+        <div class="header-right">
+            <button onclick="window.location.href='/login'">Giriş Yap</button>
+            <button onclick="window.location.href='/register'">Kayıt Ol</button>
         </div>
+    </header>
 
-        <div class="section">
-            <h2>Proje 2</h2>
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID2" allowfullscreen></iframe>
-            <a href="https://link2.com" class="button">Proje 2 Link</a>
+    <div class="projects">
+        <div class="project">
+            <h3>Proje 1</h3>
+            <iframe src="https://www.youtube.com/embed/your_video_id" allowfullscreen></iframe>
+            <button onclick="window.location.href='https://example.com'">Detaylar</button>
         </div>
-
-        <div class="section">
-            <h2>Proje 3</h2>
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID3" allowfullscreen></iframe>
-            <a href="https://link3.com" class="button">Proje 3 Link</a>
+        <div class="project">
+            <h3>Proje 2</h3>
+            <iframe src="https://www.youtube.com/embed/your_video_id" allowfullscreen></iframe>
+            <button onclick="window.location.href='https://example.com'">Detaylar</button>
         </div>
-
-        <div class="section">
-            <h2>Proje 4</h2>
-            <iframe src="https://www.youtube.com/embed/VIDEO_ID4" allowfullscreen></iframe>
-            <a href="https://link4.com" class="button">Proje 4 Link</a>
+        <div class="project">
+            <h3>Proje 3</h3>
+            <iframe src="https://www.youtube.com/embed/your_video_id" allowfullscreen></iframe>
+            <button onclick="window.location.href='https://example.com'">Detaylar</button>
+        </div>
+        <div class="project">
+            <h3>Proje 4</h3>
+            <iframe src="https://www.youtube.com/embed/your_video_id" allowfullscreen></iframe>
+            <button onclick="window.location.href='https://example.com'">Detaylar</button>
         </div>
     </div>
-</main>
 
-<footer>
-    <div class="discord-logo">
-        <a href="https://discord.gg/CcvpfU5N9S" target="_blank">
-            <img src="https://www.svgrepo.com/show/353655/discord-icon.svg" alt="Discord">
-        </a>
-    </div>
-</footer>
+    <button class="theme-toggle" onclick="toggleTheme()">Siyah/Beyaz Mod</button>
 
-<!-- Sol alt köşeye "made by traqsinc" yazısı -->
-<div class="made-by">
-    made by traqsinc
-</div>
-
-<!-- Geri dön butonu -->
-<button class="back-button" onclick="goBack()">Geri Dön</button>
-
-<!-- Traqs.gif -->
-<img src="Gifler/traqs.gif" alt="Traqs" class="traqs"> <!-- Güncellenmiş yol -->
-
-<script>
-    function showProducers() {
-        // Tüm içerikleri gizle
-        const mainContent = document.querySelector('main');
-        mainContent.style.display = 'none'; // Main içeriği gizle
-        // Traqs.gif'i göster
-        const traqsImg = document.querySelector('.traqs');
-        traqsImg.style.display = 'block';
-        // Geri dön butonunu göster
-        document.querySelector('.back-button').style.display = 'block';
-    }
-
-    function goBack() {
-        // Ana içeriği geri getir
-        const mainContent = document.querySelector('main');
-        mainContent.style.display = 'block';
-        // Traqs.gif'i gizle
-        const traqsImg = document.querySelector('.traqs');
-        traqsImg.style.display = 'none';
-        // Geri dön butonunu gizle
-        document.querySelector('.back-button').style.display = 'none';
-    }
-</script>
-
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeButton = document.querySelector('.theme-toggle');
+            if (body.style.backgroundColor === 'white') {
+                body.style.backgroundColor = '#000';
+                body.style.color = '#fff';
+                themeButton.style.backgroundColor = '#fff';
+                themeButton.style.color = '#000';
+            } else {
+                body.style.backgroundColor = '#fff';
+                body.style.color = '#000';
+                themeButton.style.backgroundColor = '#000';
+                themeButton.style.color = '#fff';
+            }
+        }
+    </script>
 </body>
 </html>
