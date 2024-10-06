@@ -29,7 +29,7 @@
         }
 
         .header-left {
-            font-size: 32px;
+            font-size: 40px; /* Yazı boyutunu büyüttük */
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 2px;
@@ -49,6 +49,7 @@
             border-radius: 5px;
             cursor: pointer;
             font-size: 16px;
+            transition: background-color 0.3s;
         }
 
         button:hover {
@@ -56,15 +57,18 @@
         }
 
         .theme-toggle {
-            position: absolute;
-            top: 20px; /* Butonu yukarı aldık */
-            right: 20px; /* Sağ üst köşeye yerleştirdik */
-            background-image: url('path_to_your_image.png'); /* Buton için resim ekleyin */
-            background-size: cover;
-            width: 50px; /* Resmin boyutu */
-            height: 50px; /* Resmin boyutu */
+            background-color: #7289da; /* Temanın buton rengi */
+            color: white;
             border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
             cursor: pointer;
+        }
+
+        .user-info {
+            display: none; /* Varsayılan olarak gizli */
+            text-align: center;
+            margin-top: 20px;
         }
 
         .projects {
@@ -90,7 +94,7 @@
 
         .project iframe {
             width: 100%;
-            height: 120px; /* Video boyutunu küçülttük */
+            height: 120px; /* Video boyutunu küçültüldü */
             border: none;
         }
     </style>
@@ -99,11 +103,16 @@
     <header>
         <div id="header-left" class="header-left">Kurdinet Projects</div>
         <div class="header-right">
-            <button onclick="window.location.href='https://yourwebsite.com/login'">Giriş Yap</button>
+            <button class="theme-toggle" onclick="toggleTheme()">Siyah/Beyaz Mod</button>
+            <button onclick="window.location.href='https://discord.com/oauth2/authorize?client_id=1292393068506517615&scope=identify'">Giriş Yap</button>
             <button onclick="window.location.href='https://yourwebsite.com/register'">Kayıt Ol</button>
         </div>
-        <button class="theme-toggle" onclick="toggleTheme()" title="Siyah/Beyaz Mod"></button>
     </header>
+
+    <div class="user-info" id="user-info">
+        <img id="user-avatar" src="" alt="Avatar" style="border-radius: 50%; width: 100px; height: 100px;">
+        <h3 id="user-name"></h3>
+    </div>
 
     <div class="projects">
         <div class="project">
@@ -146,29 +155,42 @@
 
         function toggleTheme() {
             const body = document.body;
-            const themeButton = document.querySelector('.theme-toggle');
 
             if (body.classList.contains('light-mode')) {
                 body.classList.remove('light-mode');
                 body.style.backgroundColor = '#000';
                 body.style.color = '#fff';
-                themeButton.style.backgroundColor = '#fff';
-                themeButton.style.color = '#000';
-                themeButton.innerText = 'Siyah/Beyaz Mod';
             } else {
                 body.classList.add('light-mode');
                 body.style.backgroundColor = '#fff';
                 body.style.color = '#000';
-                themeButton.style.backgroundColor = '#000';
-                themeButton.style.color = '#fff';
-                themeButton.innerText = 'Siyah/Beyaz Mod';
             }
         }
 
-        window.onload = function() {
-            if (document.body.classList.contains('light-mode')) {
-                toggleTheme();
+        // Discord'tan kullanıcı bilgilerini al
+        async function fetchUserInfo() {
+            const accessToken = new URLSearchParams(window.location.search).get('access_token');
+            if (accessToken) {
+                const response = await fetch('https://discord.com/api/users/@me', {
+                    method: 'GET',
+                    headers: {
+                        Authorization: `Bearer ${accessToken}`,
+                    },
+                });
+
+                if (response.ok) {
+                    const userData = await response.json();
+                    document.getElementById('user-name').innerText = userData.username;
+                    document.getElementById('user-avatar').src = userData.avatar ? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png` : 'default_avatar.png';
+                    document.getElementById('user-info').style.display = 'block'; // Kullanıcı bilgilerini göster
+                }
             }
+        }
+
+        // Sayfa yüklendiğinde kullanıcı bilgilerini al
+        window.onload = function() {
+            fetchUserInfo();
+            changeColor(); // Renk değişim fonksiyonu
         }
     </script>
 </body>
