@@ -26,14 +26,28 @@ async function getUserInfo() {
             });
 
             const userData = await userResponse.json();
-            document.getElementById('user-info').innerHTML = `
-                <h2>Hoş Geldiniz, ${userData.username}!</h2>
-                <img src="${userData.avatar ? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png` : ''}" alt="Avatar" width="100">
-            `;
+            // Kullanıcı bilgilerini depolamak için localStorage kullanılıyor
+            localStorage.setItem('discordUser', JSON.stringify(userData));
+
+            displayUserInfo(userData);
         } else {
             console.error('Token alınamadı:', tokenData);
         }
+    } else {
+        // Eğer daha önce giriş yapılmışsa kullanıcı bilgilerini al
+        const userData = JSON.parse(localStorage.getItem('discordUser'));
+        if (userData) {
+            displayUserInfo(userData);
+        }
     }
+}
+
+// Kullanıcı bilgilerini gösterir
+function displayUserInfo(userData) {
+    document.getElementById('user-info').innerHTML = `
+        <h2>Hoş Geldiniz, ${userData.username}!</h2>
+        <img src="${userData.avatar ? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png` : ''}" alt="Avatar" width="100">
+    `;
 }
 
 // Sayfa yüklendiğinde kullanıcı bilgilerini al
