@@ -13,7 +13,6 @@
             transition: background-color 0.5s, color 0.5s;
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Sayfayı kaydırılabilir yapmayı engelle */
         }
 
         .dark-mode {
@@ -34,19 +33,6 @@
             font-weight: bold;
             color: green;
             animation: colorChange 2s infinite alternate;
-            position: relative;
-            z-index: 1; /* Üstte olmasını sağla */
-        }
-
-        #header-left::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: -1; /* Kutucuğu arka planda göster */
         }
 
         @keyframes colorChange {
@@ -83,66 +69,33 @@
             display: flex;
             justify-content: center;
             margin-top: 20px;
-            flex-wrap: wrap; /* Projeleri yan yana göster */
+            flex-wrap: wrap;
         }
 
         .project {
-            background-color: rgba(255, 255, 255, 0.1); /* Saydam arka plan */
+            background-color: rgba(255, 255, 255, 0.1);
             color: white;
             padding: 20px;
             margin: 10px;
             border-radius: 5px;
             width: 200px;
             text-align: center;
-            position: relative;
         }
 
         .project iframe {
             width: 100%;
-            height: 120px; /* YouTube videosu için yükseklik ayarı */
+            height: 120px;
             border: none;
             border-radius: 5px;
         }
     </style>
-    <script>
-        // Kullanıcının token'ını URL'den alır ve kullanıcı bilgilerini getirir
-        function getUserInfo() {
-            const hash = window.location.hash;
-            if (hash) {
-                const token = hash.split('&')[0].split('=')[1];
-                fetch('https://discord.com/api/users/@me', {
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    }
-                })
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('user-info').innerHTML = `
-                        <h2>Hoş Geldiniz, ${data.username}!</h2>
-                        <img src="${data.avatar ? `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png` : ''}" alt="Avatar" width="100">
-                    `;
-                    // Token'ı URL'den kaldır
-                    window.location.hash = '';
-                })
-                .catch(error => console.error('Hata:', error));
-            }
-        }
-
-        // Sayfa yüklendiğinde kullanıcı bilgilerini al
-        window.onload = getUserInfo;
-
-        // Tema geçişi işlevi
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-        }
-    </script>
 </head>
 <body>
     <header id="header">
         <div id="header-left">Kurdinet Projects</div>
         <div class="header-right">
             <button class="theme-toggle" onclick="toggleTheme()">Siyah/Beyaz Mod</button>
-            <button onclick="window.location.href='https://discord.com/oauth2/authorize?client_id=1292393068506517615&permissions=8&response_type=code&redirect_uri=https%3A%2F%2Ftraqsinc.github.io%2FKurdinetProjects%2F&scope=identify+guilds+guilds.channels.read+rpc+rpc.voice.write+bot'">Discord ile Giriş Yap</button>
+            <button onclick="window.location.href='https://discord.com/oauth2/authorize?client_id=1292393068506517615&response_type=code&redirect_uri=https%3A%2F%2Ftraqsinc.github.io%2FKurdinetProjects%2F&scope=identify'">Discord ile Giriş Yap</button>
         </div>
     </header>
     
@@ -166,5 +119,7 @@
             <iframe src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID_4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </div>
+    
+    <script src="index.js"></script> <!-- JavaScript dosyasını burada ekliyoruz -->
 </body>
 </html>
