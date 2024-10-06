@@ -65,33 +65,52 @@
             background-color: green;
         }
 
-        /* Proje Stilleri */
+        #user-info {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        /* Proje Stili */
         #projects {
             display: flex;
-            flex-direction: column;
-            align-items: center;
+            justify-content: center;
             margin-top: 20px;
+            flex-wrap: wrap;
         }
 
         .project {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 20px;
             margin: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
             border-radius: 10px;
-            width: 80%;
-            max-width: 600px;
+            width: 250px;
+            text-align: center;
+            transition: transform 0.3s;
         }
 
-        /* Duyuru Stili */
-        #announcement {
-            position: fixed;
-            bottom: 10px;
-            right: 10px;
-            background-color: rgba(255, 255, 255, 0.5);
-            color: black;
-            padding: 10px;
+        .project:hover {
+            transform: scale(1.05);
+        }
+
+        .project iframe {
+            width: 100%;
+            height: 140px;
+            border: none;
             border-radius: 5px;
-            display: none; /* Başlangıçta gizli */
+        }
+
+        /* Admin Giriş Stili */
+        #admin-login {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            z-index: 10;
         }
     </style>
 </head>
@@ -126,7 +145,16 @@
         </div>
     </div>
 
-    <div id="announcement"></div>
+    <!-- Admin Giriş Formu -->
+    <div id="admin-login">
+        <h2>Admin Girişi</h2>
+        <label for="admin-username">Kullanıcı Adı:</label>
+        <input type="text" id="admin-username"><br>
+        <label for="admin-password">Şifre:</label>
+        <input type="password" id="admin-password"><br>
+        <button onclick="adminLogin()">Giriş Yap</button>
+        <button onclick="toggleAdminLogin()">Kapat</button>
+    </div>
     
     <script src="index.js"></script>
 </body>
