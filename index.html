@@ -27,10 +27,11 @@
         }
 
         .header-left {
-            font-size: 24px; /* Yazıyı küçültme */
+            font-size: 32px; /* Yazıyı biraz daha büyütelim */
             text-transform: uppercase;
             font-weight: bold;
             letter-spacing: 2px;
+            transition: color 0.5s ease; /* Renk değişim geçişi */
         }
 
         .header-right {
@@ -95,7 +96,7 @@
 </head>
 <body>
     <header>
-        <div class="header-left">Kurdinet Projects</div>
+        <div id="header-left" class="header-left">Kurdinet Projects</div>
         <div class="header-right">
             <button onclick="window.location.href='/login'">Giriş Yap</button>
             <button onclick="window.location.href='/register'">Kayıt Ol</button>
@@ -128,19 +129,48 @@
     <button class="theme-toggle" onclick="toggleTheme()">Siyah/Beyaz Mod</button>
 
     <script>
+        // Kurdinet Projects yazısının renk değiştirmesi
+        function changeColor() {
+            const headerLeft = document.getElementById('header-left');
+            let isGreen = true;
+
+            setInterval(() => {
+                if (isGreen) {
+                    headerLeft.style.color = '#00ff00'; // Yeşil
+                } else {
+                    headerLeft.style.color = '#006400'; // Koyu Yeşil
+                }
+                isGreen = !isGreen;
+            }, 500); // Her 0.5 saniyede bir renk değişir
+        }
+        changeColor(); // Sayfa açıldığında renk değiştirme başlar
+
+        // Siyah/Beyaz Mod geçişi
         function toggleTheme() {
             const body = document.body;
             const themeButton = document.querySelector('.theme-toggle');
-            if (body.style.backgroundColor === 'white') {
+
+            if (body.classList.contains('light-mode')) {
+                body.classList.remove('light-mode');
                 body.style.backgroundColor = '#000';
                 body.style.color = '#fff';
                 themeButton.style.backgroundColor = '#fff';
                 themeButton.style.color = '#000';
+                themeButton.innerText = 'Siyah/Beyaz Mod';
             } else {
+                body.classList.add('light-mode');
                 body.style.backgroundColor = '#fff';
                 body.style.color = '#000';
                 themeButton.style.backgroundColor = '#000';
                 themeButton.style.color = '#fff';
+                themeButton.innerText = 'Siyah/Beyaz Mod';
+            }
+        }
+
+        // Sayfa yenilendiğinde doğru modu geri yükle
+        window.onload = function() {
+            if (document.body.classList.contains('light-mode')) {
+                toggleTheme();
             }
         }
     </script>
