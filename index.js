@@ -1,52 +1,45 @@
-require('dotenv').config();
-const express = require('express');
-const axios = require('axios');
-const app = express();
-const port = 3000;
+// Kullanıcının token'ını URL'den alır ve kullanıcı bilgilerini getirir
+async function getUserInfo() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const code = urlParams.get('code');
+    if (code) {
+        const tokenResponse = await fetch('https://discord.com/api/oauth2/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({
+                'client_id': '1292393068506517615',
+                'client_secret': '_9DQh1-Pam10sBwISNLAmypQw2s3d8oP',
+                'grant_type': 'authorization_code',
+                'code': code,
+                'redirect_uri': 'https://traqsinc.github.io/KurdinetProjects/'
+            })
+        });
 
-// Discord OAuth2 yetkilendirme URL'si
-const authUrl = `https://discord.com/api/oauth2/authorize?client_id=${process.env.DISCORD_CLIENT_ID}&redirect_uri=${encodeURIComponent(process.env.DISCORD_REDIRECT_URI)}&response_type=code&scope=identify`;
+        const tokenData = await tokenResponse.json();
+        if (tokenData.access_token) {
+            const userResponse = await fetch('https://discord.com/api/users/@me', {
+                headers: {
+                    'Authorization': `Bearer ${tokenData.access_token}`
+                }
+            });
 
-app.get('/', (req, res) => {
-  res.send(`<a href="${authUrl}">Discord ile Giriş Yap</a>`);
-});
-
-// Callback URL'si - Discord giriş yapıldıktan sonra buraya yönlendirme yapılacak
-app.get('/callback', async (req, res) => {
-  const code = req.query.code;
-
-  // Discord'dan access token almak için istek
-  const tokenResponse = await axios.post('https://discord.com/api/oauth2/token', new URLSearchParams({
-    client_id: process.env.DISCORD_CLIENT_ID,
-    client_secret: process.env.DISCORD_CLIENT_SECRET,
-    grant_type: 'authorization_code',
-    code,
-    redirect_uri: process.env.DISCORD_REDIRECT_URI,
-  }), {
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
+            const userData = await userResponse.json();
+            document.getElementById('user-info').innerHTML = `
+                <h2>Hoş Geldiniz, ${userData.username}!</h2>
+                <img src="${userData.avatar ? `https://cdn.discordapp.com/avatars/${userData.id}/${userData.avatar}.png` : ''}" alt="Avatar" width="100">
+            `;
+        } else {
+            console.error('Token alınamadı:', tokenData);
+        }
     }
-  });
+}
 
-  const accessToken = tokenResponse.data.access_token;
+// Sayfa yüklendiğinde kullanıcı bilgilerini al
+window.onload = getUserInfo;
 
-  // Kullanıcı bilgilerini almak için Discord API'sine istek
-  const userResponse = await axios.get('https://discord.com/api/users/@me', {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    }
-  });
-
-  const user = userResponse.data;
-
-  // Kullanıcı bilgilerini göster
-  res.send(`
-    <h1>Discord Girişi Başarılı</h1>
-    <p>Kullanıcı Adı: ${user.username}</p>
-    <img src="https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png" alt="Profil Fotoğrafı" />
-  `);
-});
-
-app.listen(port, () => {
-  console.log(`Uygulama şu adreste çalışıyor: http://localhost:${port}`);
-});
+// Tema geçişi işlevi
+function toggleTheme() {
+    document.body.classList.toggle('dark-mode');
+}
