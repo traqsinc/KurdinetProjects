@@ -99,19 +99,6 @@
             border: none;
             border-radius: 5px;
         }
-
-        /* Admin Giriş Stili */
-        #admin-login {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background-color: rgba(255, 255, 255, 0.1);
-            padding: 20px;
-            border-radius: 10px;
-            z-index: 10;
-        }
     </style>
 </head>
 <body>
@@ -120,7 +107,6 @@
         <div class="header-right">
             <button class="theme-toggle" onclick="toggleTheme()">Siyah/Beyaz Mod</button>
             <button onclick="window.location.href='https://discord.com/oauth2/authorize?client_id=1292393068506517615&response_type=code&redirect_uri=https%3A%2F%2Ftraqsinc.github.io%2FKurdinetProjects%2F&scope=identify'">Discord ile Giriş Yap</button>
-            <button onclick="toggleAdminLogin()">Admin Girişi</button>
         </div>
     </header>
     
@@ -143,17 +129,6 @@
             <h3>Proje 4</h3>
             <iframe src="https://www.youtube.com/embed/YOUTUBE_VIDEO_ID_4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-    </div>
-
-    <!-- Admin Giriş Formu -->
-    <div id="admin-login">
-        <h2>Admin Girişi</h2>
-        <label for="admin-username">Kullanıcı Adı:</label>
-        <input type="text" id="admin-username"><br>
-        <label for="admin-password">Şifre:</label>
-        <input type="password" id="admin-password"><br>
-        <button onclick="adminLogin()">Giriş Yap</button>
-        <button onclick="toggleAdminLogin()">Kapat</button>
     </div>
     
     <script src="index.js"></script>
