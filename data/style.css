@@ -1,0 +1,189 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('../image/4.gif');
+    background-size: cover; 
+    background-repeat: no-repeat; 
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center; 
+}
+
+.container {
+    position: relative; 
+    width: 400px; 
+    padding: 20px;
+    background-color: rgba(34, 34, 34, 0.9); 
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5); 
+    transition: transform 0.3s ease; 
+}
+
+.container:hover {
+    transform: translateY(-5px); 
+}
+
+.profile {
+    position: relative; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center; 
+}
+
+.profile-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%; 
+    margin-bottom: 20px; 
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.5); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5); 
+}
+
+.icon-box {
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    display: flex;
+    align-items: center;
+    color: #fff; 
+    background-color: rgba(0, 0, 0, 0.7); 
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5); 
+}
+
+.icon-box i {
+    font-size: 20px; 
+    margin-right: 5px; 
+}
+
+.username {
+    display: inline-block; 
+    background-image: url('../image/sparkle.gif'); 
+    background-repeat: repeat; 
+    padding: 5px; 
+    border-radius: 5px; 
+    margin-bottom: 15px; 
+}
+
+.username--style4 {
+    color: #7ac535; 
+    text-shadow: 0px 0px 9px #008000; 
+}
+
+.username h1 {
+    font-size: 28px; 
+    margin: 0; 
+    display: inline-flex; 
+    align-items: center; 
+}
+
+.verified-badge {
+    width: 24px; 
+    height: 24px; 
+    margin-left: 5px; 
+    margin-right: 5px; 
+    vertical-align: middle; 
+}
+
+
+.badge {
+    color: #FFD700; 
+    font-size: 24px; 
+    margin-left: 5px; 
+}
+
+p 
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+.music {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.music h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #1DB954; 
+}
+
+iframe {
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.5); 
+}
+
+.socials {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.socials a {
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 30px;
+    color: #fff;
+    transition: color 0.3s ease, transform 0.3s ease; 
+}
+
+.socials a i {
+    font-size: 30px;
+}
+
+.socials a:hover {
+    color: #1DB954; 
+    transform: scale(1.2); 
+}
+
+.custom-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.custom-icon:hover {
+    transform: scale(1.2); 
+}
+
+.credits {
+    margin-top: 20px; 
+    text-align: center; 
+}
+
+.created-by {
+    color: white; 
+    font-size: 16px; 
+}
+
+.credits-text {
+    color: red; 
+    font-size: 16px; 
+    text-shadow: 0px 0px 9px #ff0000; 
+    background-image: url('../image/sparkle.gif'); 
+    background-repeat: repeat; 
+    padding: 5px 10px; 
+    border-radius: 5px; 
+    display: inline-block; 
+    margin-top: 5px; 
+    transition: transform 0.3s ease; 
+}
+
+.credits-text:hover {
+    transform: scale(1.1); 
+}
+
