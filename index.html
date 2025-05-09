@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <title>Sade Şık Site</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: white;
+    }
+
+    /* Üst menü */
+    .navbar {
+      background-color: white;
+      padding: 15px 20px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .menu-button {
+      font-size: 18px;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* Sağdan açılır menü */
+    .side-panel {
+      height: 100%;
+      width: 0;
+      position: fixed;
+      top: 0;
+      right: 0;
+      background-color: #f1f1f1;
+      overflow-x: hidden;
+      transition: 0.4s;
+      padding-top: 60px;
+      box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+    }
+
+    .side-panel-content {
+      padding: 20px;
+    }
+
+    .project {
+      margin-bottom: 20px;
+    }
+
+    .project img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .project p {
+      margin-top: 8px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 28px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="navbar">
+    <h2>Benim Logom</h2>
+    <button class="menu-button" onclick="openPanel()">Ana Menü</button>
+  </div>
+
+  <div id="sidePanel" class="side-panel">
+    <span class="close-btn" onclick="closePanel()">&times;</span>
+    <div class="side-panel-content">
+      <h3>Projeleriniz</h3>
+
+      <div class="project">
+        <img src="proje1.jpg" alt="Proje 1">
+        <p>Bu projede modern bir tasarım uygulandı.</p>
+      </div>
+
+      <!-- Yeni proje kutuları ekleyebilirsin -->
+    </div>
+  </div>
+
+  <script>
+    function openPanel() {
+      document.getElementById("sidePanel").style.width = "350px";
+    }
+
+    function closePanel() {
+      document.getElementById("sidePanel").style.width = "0";
+    }
+  </script>
+
+</body>
+</html>
 
